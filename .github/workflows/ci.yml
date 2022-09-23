@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout git repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Install JDK 11
       uses: actions/setup-java@v1
       with:
@@ -32,7 +32,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/') && success()
     steps:
     - name: Checkout git repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Install JDK 11
       uses: actions/setup-java@v1
       with:
