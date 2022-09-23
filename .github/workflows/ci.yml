@@ -1,0 +1,46 @@
+name: Android CI Workflow
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout git repository
+      uses: actions/checkout@v2
+    - name: Install JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+      run: ./gradlew build
+    - name: Upload apks (debug)
+      uses: actions/upload-artifact@v2
+      with:
+        name: morph-infinicontrol-app-debug.apk
+        path: app/build/outputs/apk/debug/app-debug.apk
+    - name: Upload apks (release)
+      uses: actions/upload-artifact@v2
+      with:
+        name: morph-infinicontrol-app-release.apk
+        path: app/build/outputs/apk/release/app-release.apk
+
+  build-release:
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/') && success()
+    steps:
+    - name: Checkout git repository
+      uses: actions/checkout@v2
+    - name: Install JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Build with Gradle
+      run: ./gradlew build
+    - name: Upload APK (release)
+      uses: actions/upload-artifact@v2
+      with:
+        name: morph-infinicontrol-app-release.apk
+        path: app/build/outputs/apk/release/app-release.apk
