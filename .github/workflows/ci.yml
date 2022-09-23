@@ -17,12 +17,12 @@ jobs:
         java-version: 11
       run: ./gradlew build
     - name: Upload apks (debug)
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: morph-infinicontrol-app-debug.apk
         path: app/build/outputs/apk/debug/app-debug.apk
     - name: Upload apks (release)
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: morph-infinicontrol-app-release.apk
         path: app/build/outputs/apk/release/app-release.apk
@@ -40,7 +40,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Upload APK (release)
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: morph-infinicontrol-app-release.apk
         path: app/build/outputs/apk/release/app-release.apk
