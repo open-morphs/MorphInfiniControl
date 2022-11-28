@@ -1,0 +1,3 @@
+[submodule "morph-rs"]
+	path = native
+	url = https://github.com/open-morphs/morph-rs
