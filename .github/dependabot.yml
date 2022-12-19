@@ -1,12 +1,9 @@
 version: 2
 updates:
-  - package-ecosystem: "gradle"
+  - package-ecosystem: "pub"
     directory: "/"
     schedule:
-      interval: "daily"
-      time: "06:00" # UTC
-    labels:
-      - "scope: app-deps"
+      interval: "weekly"
     commit-message:
       prefix: "chore(deps)"
     open-pull-requests-limit: 10
@@ -14,10 +11,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
-      time: "06:00" # UTC
-    labels:
-      - "scope: ci-deps"
+      interval: "weekly"
     commit-message:
       prefix: "chore(ci)"
     open-pull-requests-limit: 10
