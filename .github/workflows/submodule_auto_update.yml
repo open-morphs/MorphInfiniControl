@@ -1,0 +1,19 @@
+name: Update submodules on MorphInfiniControl
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: submodule-update
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.client_payload.ref == 'main' }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update module
+        run: |
+          git submodule update --init --recursive --remote
+          git config --global user.name "Open Morphs (GH Actions)"
+          git config --global user.email "noreply@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git commit -am "submod-bump: github.event.client_payload.module }}" || true
+          git push
