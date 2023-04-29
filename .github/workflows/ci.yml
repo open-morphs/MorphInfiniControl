@@ -1,0 +1,37 @@
+name: CI Workflow
+
+on:
+  push:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-app:
+    runs-on: macos-latest
+    steps:
+      - name: Checking out workspace, with submodules..
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Set up JDK toolchain..
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: zulu
+      - name: Set up Android toolchain..
+        uses: android-actions/setup-android@v2
+      - name: Setting up NDK toolchain..
+        uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r25c
+      - name: Set up Xcode toolchain.
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: 14.2.0
+      - name: Set up Rust toolchain..
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          components: rustfmt
+          override: true
